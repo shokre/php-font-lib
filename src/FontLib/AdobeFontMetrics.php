@@ -73,13 +73,13 @@ class AdobeFontMetrics {
 
     $hhea = $font->getData("hhea");
 
-    if (isset($hhea["ascent"])) {
+    if (false && isset($hhea["ascent"])) {
       $this->addPair("FontHeightOffset", $font->normalizeFUnit($hhea["lineGap"]));
       $this->addPair("Ascender", $font->normalizeFUnit($hhea["ascent"]));
       $this->addPair("Descender", $font->normalizeFUnit($hhea["descent"]));
     }
     else {
-      $this->addPair("FontHeightOffset", $font->normalizeFUnit($os2["typoLineGap"]));
+      $this->addPair("FontHeightOffset", -$font->normalizeFUnit($os2["typoLineGap"]));
       $this->addPair("Ascender", $font->normalizeFUnit($os2["typoAscender"]));
       $this->addPair("Descender", -abs($font->normalizeFUnit($os2["typoDescender"])));
     }
